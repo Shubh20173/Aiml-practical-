@@ -1,0 +1,59 @@
+import numpy as np
+
+import random
+
+Q = np.zeros((3, 2))
+
+alpha = 0.1
+
+gamma = 0.9
+
+epsilon = 0.2
+
+def next state(state, action):
+
+if action == 1:
+
+return 0
+
+return min(state + 1, 2)
+
+def reward(state, action):
+
+if action == 1:
+
+return -10
+
+elif state == 2:
+
+return -50
+
+return 5
+
+for episode in range(1000):
+
+state = random.randint(0,
+
+for step in range(20):
+
+2)
+
+KULLOLI
+
+if random.random() < epsilon:
+
+action = random.randint(0, 1)
+
+else:
+
+action = np.argmax(Q[state])
+
+ns = next_state(state, action)
+
+r = reward(state, action)
+
+Q[state, action] += alpha * (
+
+r + gamma * np.max(Q[ns]) - Q[state, action]) state = ns
+
+print("Q-table:\n", Q)
