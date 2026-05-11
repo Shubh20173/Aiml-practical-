@@ -1,0 +1,41 @@
+import pandas as pd
+
+import numpy as np
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.linear_model import LinearRegression
+
+OLI
+
+from sklearn.metrics import mean_absolute_error, r2_score
+
+df=pd.read_csv("C:/Users/Admin/Desktop/AIML_SE/dataset/6 House_Price_Data.csv")
+
+df.head
+
+#Convert categorical column (location) into numeric
+
+df = pd.get_dummies(df, columns=["location",'propertytype'], drop_first=True)
+
+#Features and target
+
+X = df.drop("totalprice", axis=1)
+
+y = df["totalprice"]
+
+#Train-Test Split
+
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=40)
+
+model = LinearRegression
+
+#Train Model
+
+model.fit(X_train, v_train)
+
+y_pred = model.predict(X_test)
+
+print("MAE:", mean_absolute_error(y_test, y_pred))
+
+print("R2 Score:", r2_score(y_test, y_pred)
