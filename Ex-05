@@ -1,0 +1,89 @@
+# Step 1: Import libraries
+
+import pandas as pd
+
+import numpy as np
+
+ULLOLI
+
+Code
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.metrics import accuracy score, confusion_matrix, classification_report
+
+# Step 2: Load dataset url = "https://raw.githubusercontent.com/selva86/datasets/master/GermanCredit.csv"
+
+data = pd.read csv(url)
+
+#Step 3: Display dataset data.head() print(data.shape)
+
+#see all columns print(data.columns.tolist())
+
+#see datatypes of features
+
+print(data.dtypes)
+
+#to see how many isnull rows are there in column
+
+print(data['credit_risk'].isnull().sum())
+
+#how to see unique variables in the class
+
+print(data['status'].nunique())
+
+#how to see names of varibles
+
+data['credit_risk'].value_counts()
+
+# Step 4: Target variable
+
+# 'credit_risk'→ good (1), bad (0)
+
+data['credit_risk'] = data['credit_risk'].replace({1:'good', 0:'bad'})
+
+# Step 5: Convert categorical variables to numeric
+
+data = pd.get_dummies(data, drop_first=True)
+
+data.shape #this is a output with drop_first ans will be (1000,49) if without drop first it
+
+show (1000,63)
+
+show (1000,63)
+
+#Step 6: Split features and target
+
+X = data.drop('credit_risk_good', axis=1)
+
+y= data['credit_risk_good']
+
+#Step 7: Train-test split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#Step 8: Feature scaling
+
+scaler = StandardScaler()
+
+X train = scaler.fit transform(X train)
+
+X test = scaler.transform(X test)
+
+# Step 9: Model training (Logistic Regression)
+
+model = LogisticRegression( model.fit(X_train, y_train)
+
+# Step 10: Prediction
+
+y_pred = model.predict(X_test)
+
+# Step 11: Evaluation
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred)) print("\nClassification Report:\n", classification_report(y_test, y_pred))
