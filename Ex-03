@@ -1,0 +1,97 @@
+import numpy as np
+
+import pandas as pd
+
+import re #re means regular expression, it extracts numbers or remive
+
+unwanted things from text
+
+from nltk.corpus import stopwords #nltk.corpus is a module in the NLTK
+
+library used to access large collections of text data (corpora).
+
+#NLTK = Natural Language Toolkit (used for NLP tasks)
+
+"from nltk.corpus import stopwords
+
+print(stopwords.words('english'))
+
+output(short)-['the', 'is', 'in', 'and', 'to', ...]
+
+means-Used to remove unnecessary words""
+
+from nltk.stem.porter import PorterStemmer
+
+#Stemming = reducing a word to its root/base form by removing suffixes.
+
+# split sentence into words
+
+# words = ["playing", "played", "plays", "study"] :>PLAY
+
+from sklearn.feature_extraction.text import Tfidf Vectorizer
+
+from sklearn.model selection import train test split
+
+from sklearn.linear_model import Logistic Regression
+
+from sklearn.metrics import accuracy_score
+
+import nltk
+
+nltk.download('stopwords')
+
+# printing the stopwords in English
+
+print(stopwords.words('english'))
+
+# loading the dataset to a pandas DataFrame
+
+news_dataset=pd.read_csv("C:/Users/Admin/Desktop/AIML_SE/dataset/3
+
+news fake.csy")
+
+# counting the number of missing values in the dataset
+
+news_dataset.isnull().sum()
+
+# replacing the null values with empty string
+
+news_dataset=news_dataset.fillna(")
+
+# merging the author name and news title
+
+news_dataset['content']=news_dataset['author']+' '+news_dataset['title']
+
+#separating the data & label
+
+x=news_dataset.drop(columns='label',axis=1)
+
+y=news_dataset['label']
+
+ps = PorterStemmer()
+
+def stem_text(text):
+
+words = text.split()
+
+stemmed = [ps.stem(word) for word in words]
+
+return " ".join(stemmed) # join back to sentence
+
+news_dataset['stemmed_content'] = news_dataset["content"].apply(stem_text)
+
+print(news_dataset)
+
+#separating the data and label
+
+x=news_dataset['stemmed_content'].values
+
+y=news_dataset['label'].values
+
+# converting the textual data to numerical data
+
+vectorizer = TfidfVectorizer()
+
+vectorizer.fit(x)
+
+x= vectorizer.transform(x)
