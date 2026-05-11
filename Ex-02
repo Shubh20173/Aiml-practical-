@@ -1,0 +1,39 @@
+import numpy as np import matplotlib.pyplot as plt
+
+# Step 1: Create time signal fs = 1000 # Sampling frequency (Hz) t = np.linspace(0, 1, fs)
+
+# Signal with 2 frequencies: 50 Hz and 120 Hz
+
+signal = np.sin(2 * np.pi * 50 * t) + 0.5 * np.sin(2 * np.pi * 120 * t)
+
+# Step 2: Apply FFT
+
+fft_values = np.fft.fft(signal)
+
+frequencies = np.fft.fftfreq(len(signal), 1/fs)
+
+# Step 3: Take only positive frequencies
+
+positive_freqs = frequencies[:len(frequencies)//2] magnitude = np.abs(fft_values[:len(fft_values)//2])
+
+# Step 4: Plot plt.figure()
+
+# Time domain
+
+plt.subplot(2, 1, 1)
+
+plt.plot(positive_freqs, magnitude)
+
+plt.plot(t, signal)
+
+plt.title("Time Domain Signal")
+
+plt.xlabel("Time (s)")
+
+plt.ylabel("Amplitude")
+
+# Frequency domain
+
+plt.subplot(2, 1, 2) plt.title("Frequency Domain (FFT)") plt.xlabel("Frequency (Hz)") plt.ylabel("Magnitude")
+
+plt.tight_layout() plt.show)
